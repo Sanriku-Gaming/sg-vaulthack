@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap');
+
+:root {
+    --background-color: #222;
+    --frame-color: #333;
+    --primary-color: #0ff;
+    --secondary-color: rgb(196, 33, 33);
+    --text-color: #fff;
+    --timer-bg-color: #444;
+    --target-color: rgba(0, 255, 255, 0.3);
+    --overlay-color: rgba(0, 0, 0, 0.5);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Bruno Ace SC", system-ui;
+    color: var(--text-color);
+    /* background-color: var(--overlay-color); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hack-container {
+    position: relative;
+    width: 850px;
+    height: 600px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--overlay-color);
+    border-radius: 12px;
+}
+
+#hack-frame {
+    position: absolute;
+    width: 886px;
+    height: 636px;
+    background-color: var(--frame-color);
+    background-image: url('/html/images/background.gif');
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 18px solid var(--frame-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--overlay-color);
+    z-index: 1000;
+}
+
+#loading-screen, #ending-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    z-index: 1000;
+}
+
+#loading-box, #ending-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 80px;
+    background-color: var(--frame-color);
+    border: 2px solid var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+#loading-text, #ending-text {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+#loading-bar {
+    width: 0;
+    height: 10px;
+    background-color: var(--primary-color);
+    transition: width 0.2s ease-in-out;
+}
+
+#loading-bar::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease-in-out;
+}
+
+#split-top, #split-bottom {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: var(--overlay-color);
+    transition: transform 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+#split-top {
+    top: 0;
+}
+
+#split-bottom {
+    bottom: 0;
+}
+
+#ending-screen {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.success #ending-box {
+    border-color: var(--primary-color);
+}
+
+.failure #ending-box {
+    border-color: var(--secondary-color);
+}
+
+.success #ending-text {
+    color: var(--primary-color);
+}
+
+.failure #ending-text {
+    color: var(--secondary-color);
+}
+
+#key-legend {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--frame-color);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#key-image {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+#hack-circle {
+    width: 272px;
+    height: 272px;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+#target-zone {
+    position: absolute;
+    background-color: var(--target-color);
+    top: 0;
+    left: 50%;
+    transform-origin: bottom center;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+#needle {
+    width: 3px;
+    height: 42%;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--primary-color) 40%);
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    z-index: 10;
+}
+
+#rings {
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#timer-text {
+    position: absolute;
+    bottom: 42px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+#time span {
+    display: inline-block;
+    width: 10px;
+    text-align: center;
+}
+
+#timer-container {
+    width: 680px;
+    height: 20px;
+    background-color: var(--timer-bg-color);
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+#timer-bar {
+    height: 100%;
+    width: 100%;
+    background-color: var(--secondary-color);
+    transition: width 0.1s linear;
+}
+
+#timer-bar::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    background-color: var(--secondary-color);
+    transition: width 0.1s linear;
+}
+
+#hack-circle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+#hack-circle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 4px solid var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+#outer-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+}
+
+.outer-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+@keyframes ringPulse {
+    0% {
+        transform: scale(0.68);
+        opacity: 1.0;
+    }
+
+    100% {
+        transform: scale(1.9);
+        opacity: 0;
+    }
+}
+
+.ring-animation {
+    animation: ringPulse 1s ease-out;
+}
+
+.flash-red {
+    color: var(--secondary-color);
+    animation: flash 1s ease-in-out;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

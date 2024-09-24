@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SG VaultHack</title>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/script.js"></script>
+        <script src="js/config.js"></script>
+    </head>
+
+    <body>
+        <div id="hack-container">
+            <div id="hack-frame">
+                <div id="key-legend">
+                    <img id="key-image" src="images/lmb.png" alt="Mouse Button">
+                </div>
+    
+                <div id="hack-circle">
+                    <div id="target-zone"></div>
+                    <div id="needle"></div>
+                    <div id="rings"></div>
+                </div>
+    
+                <div id="outer-rings">
+                    <div class="outer-ring"></div>
+                    <div class="outer-ring"></div>
+                    <div class="outer-ring"></div>
+                </div>
+    
+                <div id="timer-text">
+                    <span id="time"></span>
+                </div>
+    
+                <div id="timer-container">
+                    <div id="timer-bar"></div>
+                </div>
+    
+                <div id="loading-screen" class="overlay">
+                    <div id="loading-box">
+                        <div id="loading-text">Loading Hack...</div>
+                        <div id="loading-bar"></div>
+                    </div>
+                    <div id="split-top"></div>
+                    <div id="split-bottom"></div>
+                </div>
+    
+                <div id="ending-screen" class="overlay">
+                    <div id="ending-box">
+                        <div id="ending-text"></div>
+                    </div>
+                </div>
+                
+                <audio id="hitSound" src="sounds/hit.mp3"></audio>
+                <audio id="missSound" src="sounds/miss.mp3"></audio>
+                <audio id="successSound" src="sounds/success.mp3"></audio>
+                <audio id="failureSound" src="sounds/failure.mp3"></audio>
+            </div>
+        </div>
+    </body>
+</html>
