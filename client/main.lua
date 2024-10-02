@@ -26,7 +26,7 @@ local function StartHack(data)
 
     Citizen.Await(PendingPromises[data.id])
 
-    local success = PendingPromises[data.id]
+    local success = PendingPromises[data.id].value
     PendingPromises[data.id] = nil
 
     return success
@@ -55,10 +55,11 @@ if Config.Debug then
         data.difficulty = 'easy'
         data.targets = 3
         data.speed = 4
-        data.totalTime = 30
+        data.totalTime = 3
         data.lossTIme = 1
 
-        StartHack(data)
+        local success = exports['sg-vaulthack']:StartHack(data)
+        print('Client, Hack Complete. Success: ', success)
     end, false)
 end
 
